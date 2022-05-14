@@ -111,7 +111,12 @@ public class MainRead implements TagReportListener {
                                 return;
                             }
                             tagDTO.setProductId(dto.getProductId());
-                            outputForm.tagDTOs.remove(tagDTO);
+                            for (int i = 0; i < outputForm.tagDTOs.size(); i++) {
+                                if (outputForm.tagDTOs.get(i).getTagId().equals(tagDTO.getTagId())) {
+                                    outputForm.tagDTOs.remove(i);
+                                    break;
+                                }
+                            }
                             if (outputForm.detailScan.containsKey(tagDTO.getProductId())) {
                                 outputForm.detailScan.put(tagDTO.getProductId(), outputForm.detailScan.get(tagDTO.getProductId()) - 1);
                             }
@@ -225,7 +230,7 @@ public class MainRead implements TagReportListener {
             tagMap.put(epc, t);
             tagDTO = new TagDTO();
             tagDTO.setTagId(epc);
-            tagDTO.setTagGateOut("1");
+            tagDTO.setTagGateOut("Antenna " + String.valueOf(t.getAntennaPortNumber()));
             tagDTO.setTagDateOut(ult.initDateNow());
             for (TagDTO dto : tagDTOsMR) {
                 if (dto.getTagId().equals(tagDTO.getTagId())) {
@@ -260,7 +265,7 @@ public class MainRead implements TagReportListener {
             tagMap.remove(epc);
             tagDTO = new TagDTO();
             tagDTO.setTagId(epc);
-            tagDTO.setTagGateOut("1");
+            tagDTO.setTagGateOut("Antenna " + String.valueOf(t.getAntennaPortNumber()));
             tagDTO.setTagDateOut(ult.initDateNow());
             for (TagDTO dto : tagDTOsMR) {
                 if (dto.getTagId().equals(tagDTO.getTagId())) {
@@ -270,7 +275,12 @@ public class MainRead implements TagReportListener {
                         return;
                     }
                     tagDTO.setProductId(dto.getProductId());
-                    outputForm.tagDTOs.remove(tagDTO);
+                    for (int i = 0; i < outputForm.tagDTOs.size(); i++) {
+                        if (outputForm.tagDTOs.get(i).getTagId().equals(tagDTO.getTagId())) {
+                            outputForm.tagDTOs.remove(i);
+                            break;
+                        }
+                    }
                     if (outputForm.detailScan.containsKey(tagDTO.getProductId())) {
                         outputForm.detailScan.put(tagDTO.getProductId(), outputForm.detailScan.get(tagDTO.getProductId()) - 1);
                     }

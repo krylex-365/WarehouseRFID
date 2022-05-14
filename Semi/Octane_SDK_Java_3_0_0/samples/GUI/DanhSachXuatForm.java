@@ -46,7 +46,7 @@ public class DanhSachXuatForm extends javax.swing.JFrame {
     ArrayList<String> productsNot = new ArrayList<>();
 //    ArrayList<String> productsNew = new ArrayList<>();
     HashMap<String, Integer> detailNew = new HashMap<>();
-    ArrayList<ProductDTO> productsUpdate;
+    ArrayList<ProductDTO> productsUpdate = new ArrayList<>();
 //    ArrayList<String> productsAdd = new ArrayList<>();
     int flag = 0, count2 = 0, count3 = 0; //test data
 
@@ -78,6 +78,15 @@ public class DanhSachXuatForm extends javax.swing.JFrame {
         }
         if (detailScan != null || !detailScan.isEmpty()) {
             detailScan.clear();
+        }
+        if (productsNot != null || !productsNot.isEmpty()) {
+            productsNot.clear();
+        }
+        if (detailNew != null || !detailNew.isEmpty()) {
+            detailNew.clear();
+        }
+        if (productsUpdate != null || !productsUpdate.isEmpty()) {
+            productsUpdate.clear();
         }
         errorScan = "";
 //        jTableOrder.setRowSelectionAllowed(true);
@@ -556,11 +565,13 @@ public class DanhSachXuatForm extends javax.swing.JFrame {
         for (ProductDTO p : products) {
             if (detailNew.containsKey(p.getProductId())) {
                 int pUpdateQuantity = p.getProductQuantity() - detailNew.get(p.getProductId());
+//                System.out.println("pUpdate: " + pUpdateQuantity);
                 if (pUpdateQuantity < 0) {
                     error += p.getProductId() + "\n";
                 } else {
                     pNew = new ProductDTO(p.getProductId(), p.getProductName(), pUpdateQuantity, p.getProductDetail());
-                    productsUpdate.add(p);
+//                    System.out.println("pNew: " + pNew);
+                    productsUpdate.add(pNew);
                 }
             }
         }
@@ -592,20 +603,21 @@ public class DanhSachXuatForm extends javax.swing.JFrame {
         }
         if (count == tbModelDetail.getRowCount()) {
             if (!detailNew.isEmpty()) {
-                // orderDetailBUS.addOrderDetail(detailNew, orderId) && productBUS.updateProductsQuantity(productsUpdate)
+                orderDetailBUS.addOrderDetail(detailNew, orderId);
+                productBUS.updateProductsQuantity(productsUpdate);
             }
             //orderBUS.updateOrderCompleted(orderId, Dashboard.userLogin.getUserId())
-            if (true) { // cập nhật đơn
+            if (orderBUS.updateOrderCompleted(orderId, Dashboard.userLogin.getUserId())) { // cập nhật đơn
                 for (TagDTO a : tagDTOs) {
                     a.setOrderId(orderId);
                 }
                 //tagBUS.updateTagsOut(tagDTOs)
-                if (true) { // cập nhật date và gate out cho tag
+                if (tagBUS.updateTagsOut(tagDTOs)) { // cập nhật date và gate out cho tag
                     tbModelOrder.setValueAt("Hoàn tất", rowOrder, 2);
                     JOptionPane.showMessageDialog(this, "Xuất đơn thành công!");
                     MainRead.flag = 0;
                     MainRead.tagMap.clear();
-                    clear();
+                    initTableOrder();
                 }
             }
         }

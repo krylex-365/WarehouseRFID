@@ -104,6 +104,8 @@ values ('USER_4','user4','21232f297a57a5a743894a0e4a801fc3',N'Lê " '' . Dưỡn
 insert into Tag
 values ('TAG_1','PRO_2','',null,'',null);
 
+use PRODUCT
+go
 drop table Slot
 go
 drop table Tag
@@ -119,6 +121,10 @@ go
 drop table User_App
 go
 drop table LastId
+go
+use master
+go
+drop database PRODUCT
 go
 
 select op.order_id,op.order_date,op.status,op.product_id,op.product_name,op.order_quantity,Tag.tag_id,Tag.tag_gate_in,Tag.tag_date_in,Tag.tag_gate_out,Tag.tag_date_out
