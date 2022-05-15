@@ -20,7 +20,7 @@ public class LastIdDAO {
 
     public LastIdDAO() {
         getLastId();
-        System.out.println("LastId: " + this.toString());
+//        System.out.println("LastId: " + this.toString());
     }
 
     public LastIdDAO(String userId, String productId, String orderId, String orderDetailId) {

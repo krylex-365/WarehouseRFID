@@ -59,7 +59,7 @@ public class DanhSachXuatForm extends javax.swing.JFrame {
         this.setVisible(false);
         jTableOrder.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jTableDetail.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//        jBtnTest.setVisible(false);
+        jBtnTest.setVisible(false);
     }
 
     public void clear() {
