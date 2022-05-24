@@ -82,7 +82,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("PHẦN MỀM NHẬP XUẤT KHO");
+        jLabel1.setText("PHẦN MỀM XUẤT KHO");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 250, 40));
 
         jTxtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
